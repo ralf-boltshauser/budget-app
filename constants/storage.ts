@@ -1,8 +1,6 @@
-// storage.ts
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BudgetEntry, Settings } from "./types";
 
-// Budget items functions
 export const saveBudgetItem = async (item: BudgetEntry): Promise<void> => {
   try {
     const jsonValue = JSON.stringify(item);
@@ -54,7 +52,6 @@ export const getSettings = async (): Promise<Settings | null> => {
 };
 
 export const getCategories = async (): Promise<string[]> => {
-  // retrieve settings and return cateogries
   try {
     const settings = await getSettings();
     return settings?.categories || [];

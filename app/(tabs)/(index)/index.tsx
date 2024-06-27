@@ -19,7 +19,6 @@ export default function Home() {
     const fetchBudgetEntries = async () => {
       const entries = await getBudgetItems();
       setBudgetEntries(entries);
-      console.log(entries);
     };
     const fetchSettings = async () => {
       const settings = await getSettings();

@@ -22,14 +22,13 @@ const AddItem = () => {
     fetchCategories();
   }, []);
 
-  console.log(categories);
-
   const handleAddItem = () => {
     if (!selectedCategory || !amount) {
       return;
     }
     saveBudgetItem({
       id: Date.now().toString(),
+      date: new Date().toISOString(),
       category: selectedCategory || "",
       amount: amount || 0,
       description: description,
