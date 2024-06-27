@@ -52,3 +52,14 @@ export const getSettings = async (): Promise<Settings | null> => {
     return null;
   }
 };
+
+export const getCategories = async (): Promise<string[]> => {
+  // retrieve settings and return cateogries
+  try {
+    const settings = await getSettings();
+    return settings?.categories || [];
+  } catch (e) {
+    console.error("Error retrieving categories", e);
+    return [];
+  }
+};
