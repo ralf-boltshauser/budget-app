@@ -14,3 +14,9 @@ export interface Settings {
   roundAmounts: boolean;
   categories: string[];
 }
+
+export interface WishlistItem {
+  id: string;
+  date: string;
+  imageUri: string;
+}

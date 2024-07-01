@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BudgetEntry, Settings } from "./types";
+import { BudgetEntry, Settings, WishlistItem } from "./types";
 
 export const saveBudgetItem = async (item: BudgetEntry): Promise<void> => {
   try {
@@ -58,5 +58,35 @@ export const getCategories = async (): Promise<string[]> => {
   } catch (e) {
     console.error("Error retrieving categories", e);
     return [];
+  }
+};
+
+// Wishlist functions
+export const saveWishlistItem = async (item: WishlistItem): Promise<void> => {
+  try {
+    const jsonValue = JSON.stringify(item);
+    await AsyncStorage.setItem(`@wishlist_item_${item.id}`, jsonValue);
+  } catch (e) {
+    console.error("Error saving wishlist item", e);
+  }
+};
+
+export const getWishlistItems = async (): Promise<WishlistItem[]> => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const items = await AsyncStorage.multiGet(
+      keys.filter((key) => key.startsWith("@wishlist_item_"))
+    );
+    return items.map((item) => JSON.parse(item[1] || "") as WishlistItem);
+  } catch (e) {
+    console.error("Error retrieving wishlist items", e);
+    return [];
+  }
+};
+export const deleteWishlistItem = async (id: string): Promise<void> => {
+  try {
+    await AsyncStorage.removeItem(`@wishlist_item_${id}`);
+  } catch (e) {
+    console.error("Error deleting wishlist item", e);
   }
 };
