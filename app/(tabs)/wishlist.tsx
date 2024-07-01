@@ -19,7 +19,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
-  const [facing, setFacing] = useState("back");
   const [addingItem, setAddingItem] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState<null | string>(null);
@@ -58,8 +57,7 @@ export default function App() {
     );
   }
 
-  function toggleCameraFacing() {
-    setFacing((current) => (current === "back" ? "front" : "back"));
+  function handleTakePhoto() {
     cameraRef.current?.takePictureAsync().then((photo) => {
       if (photo) setPhoto(photo.uri);
     });
@@ -117,7 +115,7 @@ export default function App() {
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={toggleCameraFacing}
+                  onPress={handleTakePhoto}
                 >
                   <Text style={styles.text}>Take photo</Text>
                 </TouchableOpacity>
