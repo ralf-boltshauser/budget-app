@@ -76,7 +76,9 @@ export default function Home() {
               </Text>
               <Text>{format(item.amount)}</Text>
             </View>
-            <Text>{item.description}</Text>
+            <Text>
+              {item.description} @ {item.address}
+            </Text>
           </View>
         )}
         keyExtractor={(item) => item.id}

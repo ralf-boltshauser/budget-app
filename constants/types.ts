@@ -4,6 +4,9 @@ export interface BudgetEntry {
   category: string;
   amount: number;
   description: string;
+  address: string;
+  long: number;
+  lat: number;
 }
 
 export interface Settings {
